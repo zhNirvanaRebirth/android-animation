@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zhwilson.animation">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.zhwilson.propertyanimation.PropertyAnimationActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.ValueAnimatorActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.ObjectAnimatorActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.AnimatorSetActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.StateListAnimatorActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.AnimatedStateListDrawableActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.KeyFrameActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.ViewPropertyAnimatorActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.CircularRevealActivity" />
+        <activity android:name="com.zhwilson.propertyanimation.ShareElementActivity" />
+
+        <activity android:name="com.zhwilson.drawableanimation.DrawableGraphicsAnimationActivity" />
+        <activity android:name="com.zhwilson.drawableanimation.AnimationDrawableActivity"/>
+        <activity android:name="com.zhwilson.drawableanimation.AnimatedVectorDrawableActivity"/>
+        <activity android:name="com.zhwilson.drawableanimation.MorphAnimatedVectorDrawableActivity"/>
+        <activity android:name="com.zhwilson.drawableanimation.AnimatedSelectorVectorDrawableActivity"/>
+        <activity android:name="com.zhwilson.drawableanimation.TrimPathVectorDrawableActivity"/>
+
+        <activity android:name="com.zhwilson.revealandhide.RevealAndHideViewActivity" />
+        <activity android:name="com.zhwilson.revealandhide.CrossfadeAnimationActivity" />
+        <activity android:name="com.zhwilson.revealandhide.CardFlipAnimationActivity" />
+
+        <activity android:name="com.zhwilson.moveviewanimation.MoveViewAnimationActivity" />
+        <activity android:name="com.zhwilson.moveviewanimation.MoveViewWithObjectAnimatorActivity" />
+        <activity android:name="com.zhwilson.moveviewanimation.MoveViewWithCurvedMotionActivity" />
+        <activity android:name="com.zhwilson.moveviewanimation.MoveViewWithFlingAnimationActivity" />
+        <activity android:name="com.zhwilson.moveviewanimation.MoveViewWithSpringAnimationActivity" />
+        <activity android:name="com.zhwilson.moveviewanimation.ZoomViewAnimationActivity" />
+
+        <activity android:name="com.zhwilson.layoutupdateanimation.LayoutUpdateActivity" />
+        <activity android:name="com.zhwilson.layoutupdateanimation.AutoLayoutUpdateAnimationActivity" />
+        <activity android:name="com.zhwilson.layoutupdateanimation.LayoutChangeWithTransitionActivity" />
+        <activity android:name="com.zhwilson.layoutupdateanimation.LayoutChangeWithCustomTransitionActivity" />
+        <activity android:name="com.zhwilson.layoutupdateanimation.SlideViewPagerActivity" />
+    </application>
+
+</manifest>

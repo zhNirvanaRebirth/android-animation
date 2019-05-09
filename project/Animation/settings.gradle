@@ -1,0 +1,1 @@
+include ':app', ':propertyanimation', ':drawableanimation', ':revealandhide', ':moveviewanimation', ':layoutupdateanimation'

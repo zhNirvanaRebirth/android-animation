@@ -1,0 +1,67 @@
+auto animate layout updates
+	all we need to do is set an attribute in the layout to tell the android system to animate these layout changes
+	we can also create a LayoutTransition object and supply it to the layout with the setLayoutTransition() method if we want to supply custom layout animations
+	
+animate layout changes using a transition
+	transition dramework
+		group-level animations: apply one or more animation effects to all of the views in a view hierarchy
+		built-in animations: use predefined animations for common effects such as fade out or movement
+		resource file support: load view hierarchies and built-in animations from layout resource files
+		lifecycle callbacks: receive callbacks that provide control over the animations and hierarchy change process
+		
+	transitions between layouts within the same activity
+		create a Scene object for both the starting layout and the ending layout
+		create a Transition object to define what type of animation you want
+		call TransitionManager.go() and the system runs the animation to swap the layouts
+		
+	Scene
+		create a scene from a layout resource: Scene.getSceneForLayout()
+		create a scene in our code: new Scene()
+	
+	create scene actions
+		define our actions as Runnable objects and pass them to the Scene.setExitAction() or Scene.setEnterAction()
+		
+	apply a transition
+		we can instantiate a Transition using several built-in subclasses (such as AutoTransition and Fade) or define our own transition, and then pass the end scene and the Transition to TransitionManager.go()
+		
+		built-in transition type
+			AutoTransition: <autotransition />
+			Fade: <fade />
+			ChangeBounds: <changeBounds />
+			
+		create a transition instance from a resource file
+			add the res/transition/ directory
+			Transition transition = TransitionInflater.from(this).inflateTransition(...)
+		create a transition instance in our code
+		
+		apply a transition
+			call the TransitionManager.go() with the ending scene and the transition instance to use for the animation (TransitionManager.go(endingScene, transition))
+		
+		specify multiple transition
+			create a resource file in res/transition/ directory with the <transitionSet />
+			
+		apply a transition without scenes
+			create a delayed transition within a single view hierarchy
+				call the TransitionManager.beginDelayedTransition() function providing the parent view of all the view we want to change
+				make changes to the child views
+				
+		Define transition lifecycle callbacks
+		
+create a custom transition animation
+	custom transition can create an animation that is not available from any of the built-in transition classes(ex: change the forefround color of the text)
+	we have to provide the code that captures property values abd generates animations
+	
+	extend the Transition class
+	capture view property values
+		use the starting and ending value of the property to construct the animation
+		
+		capture starting values
+			implement the captureStartValues(TransitionValues transitionValues) function
+			the framework calls this function for every view in the starting scene
+			TransitionValues contains a reference to the view and a Map instance in which wen can store the view values (a key of the value: packageName:transitionName:propertyName)
+		
+		capture ending values
+		
+		create a custom animator
+			overriding the createAnimator() function (the number of times the framework calls the createAnimator() function depends on the changes that occur between the starting and ending scenes)
+		

@@ -1,0 +1,53 @@
+animation drawable
+	is useful to display a custom loading animation comprised of several images, or want one icon to morph into another
+	Animation Drawable -- drawable file
+	Animated Vector Drawable -- vector drawable
+	
+	AnimationDrawable
+		load a series of drawable resources on after another
+		in res/drawable/
+			<animation-list>
+				<item />
+				<item />
+				...
+			</animation-list>
+			
+	AnimatedVectorDrawable
+		a vector drawable is a type of drawable that is scalable without getting pixelated or blurry
+		define animated vector drawables in three xml files:
+			a vector drawable with the <vector> element in res/drawable/
+			an animated vector drawable with the <animated-vector> element in res/drawable/
+			one or more object animators with the <objectAnimator> elment in res/animator/
+		animated vector drawables can animate the attrbutes of the <group> and <path> elements
+			<group> define a set of paths or subgroups
+			<path> define paths to be drawn
+			<group> and <path> need use the android:name attribute to assign a unique name
+			
+			vector drawable in res/drawable/ :
+			<vector>
+				<group
+					android:name="....">
+					<path android:name="..." android:fillColor="...." android:pathData="..." />
+					<path ... />
+					....
+				</group>
+			</vector>
+			
+			animated vector drawable in res/drawable/ :
+			<animated-vector
+				android:drawable="vector_drawable_name">
+				<target android:name="vector_drawable_group_name" android:animation="" />
+				<target ... />
+			</animated-vector>
+			
+		SVG语法
+			M：新建起点 （M20, 30）
+			L；连接直线 （L20, 30）
+			H：纵坐标不变，横坐标连线 （H20）
+			V：横坐标不变，纵坐标连线 （V20）
+			Q：二阶贝塞尔曲线 （Q20, 30, 40, 50）
+			C：三阶贝塞尔曲线 （C20, 30, 40, 50, 60, 70）
+			Z：连接首尾，无参数
+			A：圆弧 (rx,ry x-axis-rotation large-arc-flag sweep-flag x y) 
+					x轴半径 y轴半径 x轴旋转角度 是否取大圆弧 是否顺时针 起始点在椭圆中的位置x轴 起始点在椭圆中的位置y轴（实践中得到最后两个数是终点的x，y坐标点）
+			(**大写字母表示使用原点坐标系，小写字母表示使用相对坐标系**)

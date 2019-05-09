@@ -1,0 +1,19 @@
+when showing or hiding a view, we can use three common animations: circular reveal animation, crossfade animation, cardflip animation
+
+	crossfade animation
+		use ViewPropertyAnimator
+		for the view to be fade in, init it's visibility to GONE (this prevent the view from taking up layout space and omit it from layout calculations)
+		crossfade the view
+			for the view that is fading in, set the alpha value to 0 and the visibility to VISIBLE (it was initially set to GONE)
+			for the view that is fading in , animate its alpha value from 0 to 1, for the view that is fading out, animate its alpha value from 1 to 0
+			use onAnimationEnd() in an Animator.AnimatorListener, set the visibility of the view that was fading out to GONE
+			
+	cardflip animation
+		use FragmentTransaction
+		in order to create the card flip animation, we need four animators, two for the front of the card (out to the left, in from the left), two for the back of the card (in from the right, out to the right)
+		
+		getSupportFragmentManager().beginTransaction().setCustomAnimations(...)....
+		
+	circular reveal animator
+		use ViewAnimationUtils.createCircularReveal(....)
+		

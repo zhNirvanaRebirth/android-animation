@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bar" android:state_selected="true" android:drawable="@drawable/bar_vector_drawable" />
+    <item android:id="@+id/search" android:state_selected="false" android:drawable="@drawable/search_vector_drawable" />
+    <transition
+        android:fromId="@id/bar"
+        android:toId="@id/search"
+        android:drawable="@drawable/animated_vector_bar_to_search" />
+    <transition
+        android:fromId="@id/search"
+        android:toId="@id/bar"
+        android:drawable="@drawable/animated_vector_search_to_bar" />
+</animated-selector>

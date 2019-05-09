@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:valueType="colorType"
+    android:valueFrom="#645321"
+    android:valueTo="#ff0000"
+    android:duration="3000" />

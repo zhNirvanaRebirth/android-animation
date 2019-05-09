@@ -1,0 +1,30 @@
+start an activity using an animation
+	enter and exit transitions
+		explode
+		slide
+		fade
+		
+		any transition that extends the Visibility class is supported as an enter or exit transition
+		
+	shared elements transitions
+		changeBounds
+		changeClipBounds
+		changeTransform
+		changeImageTransform
+		
+	check the system version
+		activity transition apis are available on Android 5.0(API21)
+		
+	specify custom transitions
+		enable window content transitions with the android:windowActivityTransitions attribute when we define a style
+		or call the Window.requestFeature() function to enable window content transition
+		
+	start an activity using transitions
+		startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+		
+	start an activity with a shared element
+		enable window content transitions in our theme
+		specify a shared elements transition in our style
+		define our transition as an xml resource
+		assign a common name to the shared elements in both layouts with the android:transitionName attribute
+		use the ActivityOptions.makeSceneTransitionAnimation() function

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/pressed" android:drawable="@drawable/qmui_icon_notify_done"
+        android:state_pressed="true"/>
+    <item android:id="@+id/focused" android:drawable="@drawable/qmui_icon_notify_info"
+        android:state_focused="true"/>
+    <item android:id="@+id/normal"
+        android:drawable="@drawable/qmui_icon_notify_error"/>
+
+    <!-- specify a transition -->
+    <transition android:fromId="@id/normal" android:toId="@id/pressed">
+        <animation-list>
+            <item android:duration="15" android:drawable="@drawable/loading_one"/>
+            <item android:duration="15" android:drawable="@drawable/loading_two"/>
+            <item android:duration="15" android:drawable="@drawable/loading_three"/>
+            <item android:duration="15" android:drawable="@drawable/loading_four"/>
+            <item android:duration="15" android:drawable="@drawable/loading_five"/>
+            <item android:duration="15" android:drawable="@drawable/loading_six"/>
+        </animation-list>
+    </transition>
+</animated-selector>

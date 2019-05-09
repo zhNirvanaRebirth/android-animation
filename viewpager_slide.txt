@@ -1,0 +1,13 @@
+slide between fragments using ViewPager
+	create the views for the content of a fragment
+	create the fragment
+	add a ViewPager
+	create an activity
+		sets the content view to be the layout with the ViewPager
+		create a clss that extents the FragmentStatePagerAdapter and implements the getItem() method to supply instances of ScreenSlidePageFragment and implement the getCound() method that return the amount of pages the adapter will create
+		hooks up the PagerAdapter to the ViewPager
+		
+	customize the animation using PageTransformer
+		implement the ViewPager.PageTransformer interface and override the transformPage() method
+		call ViewPager.setPageTransformer()
+		

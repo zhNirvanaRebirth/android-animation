@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+    <Button
+        android:id="@+id/animation_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AnimationDrawable"
+        android:layout_marginTop="10dp" />
+    <Button
+        android:id="@+id/animated_vector_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AnimatedVectorDrawable"
+        android:layout_marginTop="10dp" />
+    <Button
+        android:id="@+id/morph_animated_vector_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MorphAnimatedVectorDrawable"
+        android:layout_marginTop="10dp" />
+    <Button
+        android:id="@+id/animated_selector_vector_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AnimatedSelectorVectorDrawable"
+        android:layout_marginTop="10dp" />
+    <Button
+        android:id="@+id/trim_path_vector_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TrimPathVectorDrawable"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

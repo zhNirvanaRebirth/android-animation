@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android" android:drawable="@drawable/directory_vector_drawable">
+    <target
+        android:animation="@animator/animation_directory_vector_group_rotation"
+        android:name="directory_vector_group" />
+    <target
+        android:animation="@animator/animation_directory_vector_morph"
+        android:name="directory_vector_path" />
+</animated-vector>

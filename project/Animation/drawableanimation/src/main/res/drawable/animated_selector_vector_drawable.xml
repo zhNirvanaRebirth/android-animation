@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/directory" android:drawable="@drawable/directory_vector_drawable" android:state_selected="false" />
+    <item android:id="@+id/arrow" android:drawable="@drawable/arrow_vector_drawable" android:state_selected="true" />
+    <transition
+        android:fromId="@id/directory"
+        android:toId="@id/arrow"
+        android:drawable="@drawable/animated_vector_directory_to_arrow" />
+    <transition
+        android:fromId="@id/arrow"
+        android:toId="@id/directory"
+        android:drawable="@drawable/animated_vector_arrow_to_directory" />
+</animated-selector>

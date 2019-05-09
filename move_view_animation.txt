@@ -1,0 +1,53 @@
+move a view with animation
+	change the view position with ObjectAnimator
+		translationX, translationY
+		
+		add curved motion
+			with PathInterpolator
+			with path (ObjectAnimator.ofFloat(view, View.X, View.Y, path)
+			
+move views using a fling animation
+	we need physics-based support library
+		implementation 'com.android.support:support-dynamic-animation:28.0.0'
+		
+	create a fling animation
+		use FlingAnimation : new FlingAnimation(view, DynamicAnimation.SCROLL_X)
+		set the begin velocity : setStartVelocity()   (we can use the GestureDetector.OnGestureListener and the VelocityTracker to compute the start velocity)
+		set an animation value range : setMinValue()/setMaxValue() (when the value of a fling animation reaches the value, the animation ends)
+		set friction : setFriction() (if we want to change the friction of the animation, the default is 1)
+		set the minimum visible change : setMinimumVisibleChange()
+		
+move views using spring physics
+	lifecycle of a spring animation
+		using the SpringForce class
+			we can use SpringForce customize spring's stiffness, its damping ratio and its final position
+			as soon as the animation begins, the spring force updates the animation value and the velocity on each frame, the animation continues until the spring force reaches an equilibrium
+			
+	build a spring animation
+		add the support library
+		create s spring animation (create an instance of the SpringAnimation)
+	
+	damping ratio
+		Overdamping
+		Critical damping
+		Underdamping
+		Undamped
+		SpringAnimation -> getSpring() -> setDampingRatio()
+		
+	Stiffness
+		SpringAnimation -> getSpring() -> setStiffness()
+		
+		
+enlarge a view with zoom animation
+	create the views
+		create layout file that contains the small and large version of the content
+	set up the zoom animation
+		set up the event handlers that trigger the zoom animation
+	zoom the view
+		we need to animate from the normal sized view to the zoomed view when appropriate (animate from the bounds of the normal-sized view to the bounds of the larger-sized view or reverse)
+		set the content of the view we will zoom to
+		calculate the starting and ending bounds for the view (view.getGlobalVisibleRect())
+		animate each of the four positioning and sizing properties x, y scale_x, scale_y simultaneously, from the starting bounds to the ending bounds, to handle this, we may need to adjust the aspect ratio (ex: (w-y: 1-1) -> (w-y: 3-1))
+			these four animations are added to an AniamtorSet so that they can be started at the same time
+		set the reverse animation to zoom back
+		

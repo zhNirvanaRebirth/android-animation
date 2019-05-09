@@ -1,0 +1,133 @@
+** overview
+	animate bitmaps:
+		use drawable resource
+		define animation behavior
+		
+		
+	animate UI visibility and motion
+		property animation system
+		enable animations on layout
+		
+
+	physics-based motion
+		physics-based animation apis
+		
+
+	animate layout changes
+		transition framework
+		
+
+	animate between activities
+		transition framework
+		
+
+** property animation (Demo: android-CustomTransition on github)
+	duration (default 300ms)
+	time interpolation
+	repeat count and behavior
+	animator sets
+	frame refresh delay (default is refresh every 10ms)
+	
+	start value, end value, elapsed fraction, interpolated fraction
+	
+	differs of property animation and view animation
+		the view animation system is in android.view.animation,
+		and provides the capability to only animate view object,
+		and it only exposes a few aspects of a view object to animate, such as the scaling and rotation, but not the background color etc,
+		and it only modified where the view was drawn but not the actual view itself(**).
+		
+	apis
+		in android.animation
+		Animator
+			ValueAnimator
+			ObjectAnimator
+			AnimatorSet
+		Evaluator
+			IntEvaluator
+			FloatEvaluator
+			ArgbEvaluator
+			TypeEvaluator
+		TimeInterpolator(int android.view.animation)
+			AccelerateDecelerateInterpolator
+			AccelerateInterpolator
+			AnticipateInterpolator
+			AniticipateOvershootInterpolator
+			BounceInterpolator
+			CycleInterpolator
+			DecelerateInterpolator
+			LinearInterpolator
+			OvershootInterpolator
+			
+		Animation listener
+			Animator.AnimatorListener
+				onAnimationStart
+				onAnimationEnd
+				onAnimationRepeat
+				onAnimationCancel
+			ValueAnimator.AnimatorUpdateListener
+				onAnimationUpdate (use getAnimatedValue to get animated value)
+			AnimatorListenerAdapter
+				
+	animate layout changes to ViewGroup objects  (Demo:  LayoutAnimations)
+		use LayoutTransition class (APPEARING, CHANGE_APPEARING, DISAPPEARING, CHANGE_DISAPPEARING)
+		the only thing need to do is to set the android:animateLayoutchanges attribute to true for the ViewGroup (android:animateLayoutChanges="true")
+		
+	animate view state changes using StateListAnimator
+		calling that animation whenever the specified view state (such as pressed or focused) changes
+		defined in an XML resource (res/xml/xxx.xml)
+		with a root <selector> element and child <item> element that each specify a different view state defined bu the StateListAnimator
+		each <item> contains the definition for a property animation set
+		StateListAnimator:
+			<selector>
+				<item>
+					<set>
+						<ObjectAnimator />
+						<ObjectAnimator />
+						...
+					</set>
+				</item>
+				...
+			</selector>
+		to attach the state list animator to a view, add the android:stateListAnimator attribute in layout
+		or use the AnimatorInflater.loadStateListAnimator() method and assign the animator to view with View.setStateListAnimator() method
+		instead of animating properties of the view, we can play a drawable animation between state change use AnimatedStateListDrawable
+		AnimatedStateListDrawable:
+			<animated-selector>
+				<item />
+				<item />
+				...
+				<transition>
+					<animation-list>
+						<item />
+						<item />
+						...
+					</animation-list>
+				</transition>
+				...
+			</animated-selector>
+		
+	TypeEvaluator
+		the types that are known by the Android system are int, float and color, which are support by the IntEvaluator, FloatEvaluator and ArgbEvaluator
+		other type is unknown to the Android system, we need create our own evaluator by implementing the TypeEvaluator interface
+		
+	specify keyframes
+		a Keyframe object consists of a time/value pair that lets you define a specific state at a specific time of an animation
+		Keyframe
+			ofInt
+			ofFloat
+			ofObject
+		PropertyValuesHolder
+		
+	ViewPropertyAnimator
+		provides a simple way to animate several properties of a view in parallel
+		
+	declare animations in xml
+		save the xml files for property animations in the res/animator/ directory
+		ValueAnimator - <animator>
+		ObjectAnimator - <objectAnimator>
+		AnimatorSet - <set>
+		
+		AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(..)
+		set.setTarget(..)
+		set.start()
+		
