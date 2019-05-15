@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.zhwilson.animation.view.RotateClipView;
 import com.zhwilson.drawableanimation.DrawableGraphicsAnimationActivity;
 import com.zhwilson.layoutupdateanimation.LayoutUpdateActivity;
 import com.zhwilson.moveviewanimation.MoveViewAnimationActivity;
@@ -45,6 +46,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LayoutUpdateActivity.class));
+            }
+        });
+        findViewById(R.id.practice_clip_animation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ClipAnimationActivity.class));
+            }
+        });
+        findViewById(R.id.rotate_animation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RotateAnimationActivity.class));
             }
         });
     }

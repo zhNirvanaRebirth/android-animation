@@ -52,6 +52,9 @@
         <activity android:name="com.zhwilson.layoutupdateanimation.LayoutChangeWithTransitionActivity" />
         <activity android:name="com.zhwilson.layoutupdateanimation.LayoutChangeWithCustomTransitionActivity" />
         <activity android:name="com.zhwilson.layoutupdateanimation.SlideViewPagerActivity" />
+
+        <activity android:name=".ClipAnimationActivity" />
+        <activity android:name=".RotateAnimationActivity" />
     </application>
 
 </manifest>
