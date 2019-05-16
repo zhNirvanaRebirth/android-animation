@@ -55,6 +55,7 @@
 
         <activity android:name=".ClipAnimationActivity" />
         <activity android:name=".RotateAnimationActivity" />
+        <activity android:name=".PraiseActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Praise">
+        <attr name="DrawablePosition" format="enum" >
+            <enum name="Left" value="1" />
+            <enum name="Top" value="2" />
+            <enum name="Right" value="3" />
+            <enum name="Bottom" value="4" />
+        </attr>
+        <attr name="DrawablePadding" format="dimension|reference" />
+        <attr name="PraiseCountTextSize" format="dimension|reference" />
+        <attr name="PraiseCountTextColor" format="color|reference" />
+    </declare-styleable>
+</resources>

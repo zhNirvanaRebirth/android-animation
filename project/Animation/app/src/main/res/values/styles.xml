@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DefaultPraise">
+        <item name="DrawablePosition">Left</item>
+        <item name="DrawablePadding">10dp</item>
+        <item name="PraiseCountTextSize">14sp</item>
+        <item name="PraiseCountTextColor">@color/colorGray</item>
+    </style>
 </resources>

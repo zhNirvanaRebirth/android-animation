@@ -26,7 +26,8 @@ public class StereoView extends View{
     private float rectWidth = 700f;
     private float rectHeight = 160f;
     private RectF rectF = new RectF(0, 0, rectWidth, rectHeight);
-    private int[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+//    private int[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+    private int[] colors = {Color.WHITE};
     private int currentColorIndex = 0;
     public StereoView(Context context) {
         this(context, null);
@@ -88,7 +89,7 @@ public class StereoView extends View{
             currentColorIndex = 3;
             degree = rotateDegree+270f;
         }
-        drawRect(canvas, colors[currentColorIndex], degree, false);
+        drawRect(canvas, colors[currentColorIndex%colors.length], degree, false);
         drawRect(canvas, colors[(currentColorIndex+1)%colors.length], degree, true);
     }
 
