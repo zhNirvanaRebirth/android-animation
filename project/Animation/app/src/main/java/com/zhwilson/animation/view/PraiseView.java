@@ -1,5 +1,11 @@
 package com.zhwilson.animation.view;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.Keyframe;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -35,8 +41,11 @@ public class PraiseView extends ViewGroup {
     private int minHeight;
     private int verOffset;
     private int horOffset;
+    private float verDelta;
 
     private int praiseCount = MAX_PRAISE_COUNT - 1;
+    private char[] praiseChars;
+    private char[] deltaChars;
     private boolean isPraised = false;
     private float[] signalTextWidths = new float[1];
     private float textWidth;
@@ -75,7 +84,6 @@ public class PraiseView extends ViewGroup {
         signalTextHeight = textPaint.getFontSpacing();
         textHeight = signalTextHeight*3;
         initBitmap(context);
-
         initChildren(context);
     }
 
@@ -204,17 +212,29 @@ public class PraiseView extends ViewGroup {
             return;
         }
         if (status == Status.Praising) {
+            int delta = praiseChars.length - deltaChars.length;
             //current
-            canvas.drawText(String.valueOf(praiseCount), textX, textY + signalTextHeight*2, textPaint);
+            float tVerDelta = 0;
+            for (int i = 0; i < praiseChars.length; i++) {
+                if (i >= delta) tVerDelta = verDelta;
+                canvas.drawText(String.valueOf(praiseChars[i]), textX + signalTextWidths[0] * i, textY + signalTextHeight * 2 + tVerDelta, textPaint);
+            }
             //next
-            canvas.drawText(String.valueOf(1111), textX, textY + textHeight, textPaint);
+            for (int i = 0; i < deltaChars.length; i++)
+                canvas.drawText(String.valueOf(deltaChars[i]), textX + signalTextWidths[0]*(i + delta), textY + textHeight + verDelta, textPaint);
             return;
         }
         if (status == Status.UnPraising) {
             //pre
-            canvas.drawText("7", textX + signalTextWidths[0]*3, textY + signalTextHeight, textPaint);
+            int delta = praiseChars.length - deltaChars.length;
+            float tVerDelta = 0;
+            for (int i = 0; i < deltaChars.length; i++)
+                canvas.drawText(String.valueOf(deltaChars[i]), textX + signalTextWidths[0]*(i + delta), textY + signalTextHeight + verDelta, textPaint);
             //current
-            canvas.drawText(String.valueOf(praiseCount), textX, textY + signalTextHeight*2, textPaint);
+            for (int i = 0; i < praiseChars.length; i++) {
+                if (i >= delta) tVerDelta = verDelta;
+                canvas.drawText(String.valueOf(praiseChars[i]), textX + signalTextWidths[0] * i, textY + signalTextHeight * 2 + tVerDelta, textPaint);
+            }
             return;
         }
     }
@@ -223,19 +243,90 @@ public class PraiseView extends ViewGroup {
         this.praiseCount = praiseCount;
     }
 
+    public void notifyPraiseCount(boolean isPraise) {
+        praiseChars = String.valueOf(praiseCount).toCharArray();
+        praiseCount = isPraise ? praiseCount + 1 : praiseCount - 1;
+        char[] nextPraiseChars = String.valueOf(praiseCount).toCharArray();
+        if (praiseChars.length != nextPraiseChars.length) deltaChars = nextPraiseChars;
+        else {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < praiseChars.length; i++) {
+                if (praiseChars[i] == nextPraiseChars[i]) continue;
+                else stringBuilder.append(nextPraiseChars[i]);
+            }
+            deltaChars = stringBuilder.toString().toCharArray();
+        }
+        textAnimation(isPraise);
+    }
+
+    public void setVerDelta(float verDelta) {
+        this.verDelta = verDelta;
+        invalidate();
+    }
+
     public void setPraised(boolean praised) {
         isPraised = praised;
     }
 
-    private void praise() {//点赞
-        //TODO
+    public boolean isPraised() {
+        return isPraised;
     }
 
-    private void unPraise() {//取消点赞
+    public void praise() {//点赞
+        if (isPraised) return;
+        isPraised = true;
         //TODO
+        imgPraiseAnimation();
+        notifyPraiseCount(true);
+    }
+
+    public void unPraise() {//取消点赞
+        if (!isPraised) return;
+        isPraised = false;
+        //TODO
+        notifyPraiseCount(false);
     }
 
     private enum Status {
         Praising, Normal, UnPraising
+    }
+
+    private void textAnimation(boolean praising) {
+        status = praising ? Status.Praising : Status.UnPraising;
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this, "verDelta", 0, praising ? -signalTextHeight : signalTextHeight);
+        objectAnimator.setDuration(1000);
+        objectAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                status = Status.Normal;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                status = Status.Normal;
+            }
+        });
+        objectAnimator.start();
+    }
+
+    private void imgPraiseAnimation() {
+        Keyframe keyframe1 = Keyframe.ofFloat(0, 1);
+        Keyframe keyframe2 = Keyframe.ofFloat(0.5f, 1.4f);
+        Keyframe keyframe3 = Keyframe.ofFloat(1, 1);
+        PropertyValuesHolder valuesHolderX = PropertyValuesHolder.ofKeyframe("scaleX", keyframe1, keyframe2, keyframe3);
+        PropertyValuesHolder valuesHolderY = PropertyValuesHolder.ofKeyframe("scaleY", keyframe1, keyframe2, keyframe3);
+        ObjectAnimator scaleX = new ObjectAnimator();
+        ObjectAnimator scaleY = new ObjectAnimator();
+        scaleX.setTarget(praiseIV);
+        scaleY.setTarget(praiseIV);
+        scaleX.setValues(valuesHolderX);
+        scaleY.setValues(valuesHolderY);
+        scaleX.setDuration(500);
+        scaleY.setDuration(500);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(scaleX).with(scaleY);
+        animatorSet.start();
     }
 }
