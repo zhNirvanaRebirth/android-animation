@@ -40,7 +40,8 @@ public class PraiseView extends ViewGroup {
     private int minWidth;
     private int minHeight;
     private int verOffset;
-    private int horOffset;
+    private int horOffset
+            ;
     private float verDelta;
 
     private int praiseCount = MAX_PRAISE_COUNT - 1;
